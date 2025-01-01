@@ -1,0 +1,24 @@
+tasks = [
+    <% @task_notes.each do |t| %>
+    {
+        id: <%= t.id %>,
+        title: "<%= t.title %>",
+        description: "<%= t.description %>",
+        priority: <%= TaskNote.priorities[t.priority] %>,
+        due_date: "<%= t.due_date %>"
+    },
+    <% end %>
+]
+
+var app = angular.module('app', []);
+app.controller('appCtrl', function($scope) {
+    $scope.tasks = tasks;
+    $scope.priorities = ["text-primary", "text-warning", "text-danger"]
+    $scope.low_enabled = $scope.medium_enabled = $scope.high_enabled = true
+    $scope.filter_priority = function(){
+        let marks = [$scope.low_enabled, $scope.medium_enabled, $scope.high_enabled]
+        $scope.tasks = tasks.filter(t => marks[t.priority])
+    }
+});
+
+$(".task-note-bar").next().hide()

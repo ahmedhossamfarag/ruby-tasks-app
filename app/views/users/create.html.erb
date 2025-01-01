@@ -1,0 +1,28 @@
+<% content_for :title, "Create Account" %>
+
+<div class="d-flex justify-content-center">
+  <div class="d-flex flex-column vh-100 justify-content-center vw-100 max-w500">
+    <div class="container p-md-5 p-2 border">
+      <%= form_for :user do |f| %>
+        <div class="mb-3">
+          <label for="user_username" class="form-label">Username</label>
+          <%= f.text_field :username, class: "form-control", placeholder: "Enter username" %>
+          <div class="invalid-feedback d-block">
+            <%= @user.errors.full_messages_for(:username).first %>
+          </div>
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="user_password" class="form-label">Password</label>
+          <%= f.text_field :password, class: "form-control", placeholder: "Enter password" %>
+          <div class="invalid-feedback d-block">
+            <%= @user.errors.full_messages_for(:password).first %>
+          </div>
+        </div>
+        <div>
+          <%= f.submit "Create", class: "btn btn-primary mx-2" %>
+          <%= link_to "Login", users_login_path %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
